@@ -1,18 +1,19 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import Text from './Text';
 
 const RepositoryItem = ({ repository }) => {
   return (
     <View>
-      <Text>Full name: {repository.fullName}</Text>
-      <Text>Description: {repository.description}</Text>
-      <Text>Language: {repository.language}</Text>
-      <Text>Stars: {repository.stargazersCount}</Text>
-      <Text>Forks: {repository.forksCount}</Text>
-      <Text>Reviews: {repository.reviewCount}</Text>
-      <Text>Rating: {repository.ratingAverage}</Text>
+      <Text color="textSecondary">Full name: {repository.fullName}</Text>
+      <Text color="textSecondary">Description: {repository.description}</Text>
+      <Text color="textSecondary">Language: {repository.language}</Text>
+      <Text color="textSecondary">Stars: {repository.stargazersCount}</Text>
+      <Text color="textSecondary">Forks: {repository.forksCount}</Text>
+      <Text color="textSecondary">Reviews: {repository.reviewCount}</Text>
+      <Text color="textSecondary">Rating: {repository.ratingAverage}</Text>
     </View>
   );
 };
   
-  export default RepositoryItem;
+export default RepositoryItem;
