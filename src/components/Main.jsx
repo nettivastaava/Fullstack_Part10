@@ -1,11 +1,17 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 
+const styles = StyleSheet.create({
+  background: {
+    backgroundColor: '#e1e4e8'
+  },
+});
+
 const Main = () => {
   return (
-    <View>
+    <View style={styles.background}>
       <AppBar />
       <RepositoryList />
     </View>
