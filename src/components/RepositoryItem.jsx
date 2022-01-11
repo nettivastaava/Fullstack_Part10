@@ -23,6 +23,16 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 10,
+  },
+  repoStats: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  statItem: {
+    flexGrow: 1,
+    flexDirection: 'column',
+    padding: 5,
+    alignItems: 'center'
   }
 });
 
@@ -31,6 +41,7 @@ const onPressFunction = () => {
 }
 
 const RepositoryItem = ({ repository }) => {
+
   return (
     <View>
       <View style={styles.header}>
@@ -49,10 +60,24 @@ const RepositoryItem = ({ repository }) => {
           </View>
         </View>
       </View>
-      <Text color="textSecondary">Stars: {repository.stargazersCount}</Text>
-      <Text color="textSecondary">Forks: {repository.forksCount}</Text>
-      <Text color="textSecondary">Reviews: {repository.reviewCount}</Text>
-      <Text color="textSecondary">Rating: {repository.ratingAverage}</Text>
+      <View style={styles.repoStats}>
+        <View style={styles.statItem}>
+          <Text color="textSecondary" fontWeight="bold">{repository.stargazersCount}</Text>
+          <Text color="textSeconday">Stars</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text color="textSecondary" fontWeight="bold">{repository.forksCount}</Text>
+          <Text color="textSecondary">Forks</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text color="textSecondary" fontWeight="bold">{repository.reviewCount}</Text>
+          <Text color="textSecondary">Reviews</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text color="textSecondary" fontWeight="bold">{repository.ratingAverage}</Text>
+          <Text color="textSecondary">Rating</Text>
+        </View>
+      </View>
     </View>
   );
 };
