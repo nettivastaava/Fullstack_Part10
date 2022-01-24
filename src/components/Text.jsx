@@ -31,7 +31,6 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
 
   if (!isNaN(props.children)) {
     props.children = Math.abs(props.children) > 999 ? Math.sign(props.children)*((Math.abs(props.children)/1000).toFixed(1)) + 'k' : Math.sign(props.children)*Math.abs(props.children);
-    console.log(props.children);
   }
 
   const textStyle = [
