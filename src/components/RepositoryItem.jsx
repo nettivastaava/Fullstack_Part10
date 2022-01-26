@@ -43,7 +43,7 @@ const onPressFunction = () => {
 const RepositoryItem = ({ repository }) => {
 
   return (
-    <View>
+    <View testID="repositoryItem">
       <View style={styles.header}>
         <Image
           style={styles.profilePicture}
