@@ -55,8 +55,6 @@ describe('RepositoryList', () => {
         </View>
       );
 
-      debug();
-
       const repositoryItems = getAllByTestId('repositoryItem');
       const [firstRepositoryItem, secondRepositoryItem] = repositoryItems;
   

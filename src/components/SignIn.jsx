@@ -7,6 +7,11 @@ import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
 import { useHistory } from "react-router-dom";
 
+const initialValues = {
+  username: '',
+  password: '',
+};
+
 const styles = StyleSheet.create({
   language: {
     backgroundColor: '#0366d6',
@@ -22,19 +27,37 @@ const styles = StyleSheet.create({
   }
 });
 
-const initialValues = {
-  username: '',
-  password: '',
-};
+export const SignInContainer = ({ onSubmit}) => {
+  const initialValues = {
+    username: '',
+    password: '',
+  };
+
+  const validationSchema = yup.object().shape({  
+    username: yup    
+      .string()
+      .required('Username is required'),  
+    password: yup    
+      .string()
+      .required('Password is required'),
+  });
+
+  return(
+    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+    </Formik>
+  );
+}
 
 const SignInForm = ({ onSubmit }) => {
+
   return (
     <View>
       <FormikTextInput style={styles.inputField} name="username" placeholder="Username" />      
       <FormikTextInput style={styles.inputField} name="password" placeholder="Password" secureTextEntry={true} />     
       <View style={styles.language}>
         <Pressable fontWeight="bold" onPress={onSubmit}>
-          <Text color="textTab">Sign in</Text>
+          <Text color="textTab">Submit</Text>
         </Pressable>
       </View> 
     </View>
