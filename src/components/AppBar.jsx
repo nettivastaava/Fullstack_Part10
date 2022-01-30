@@ -1,4 +1,4 @@
-import React, { useEffect,useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Link } from 'react-router-native';
 import Constants from 'expo-constants';
