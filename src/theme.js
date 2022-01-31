@@ -5,7 +5,7 @@ const theme = {
     textPrimary: '#24292e',
     textSecondary: '#586069',
     primary: '#0366d6',
-    textTab: '#FFFFFF'
+    textTab: '#FFFFFF',
   },
   fontSizes: {
     body: 14,

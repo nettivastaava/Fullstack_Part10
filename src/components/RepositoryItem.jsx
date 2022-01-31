@@ -16,9 +16,13 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'flex-start'
   },
+  headerItem: {
+    marginTop: 5
+  },
   language: {
     backgroundColor: '#0366d6',
     padding: 5,
+    marginTop: 5,
     alignItems: 'center'
   },
   profilePicture: {
@@ -62,7 +66,7 @@ const RepositoryItem = ({ repository }) => {
           </Image>
           <View style={styles.headerText}>
             <Text color="textSecondary" fontWeight="bold">{repository.fullName}</Text>
-            <Text color="textSecondary">{repository.description}</Text>
+            <Text style={styles.headerItem} color="textSecondary">{repository.description}</Text>
             <View style={styles.language}>
               <Pressable>
                 <Text color="textTab" fontWeight="bold">{repository.language}</Text>
@@ -95,7 +99,7 @@ const RepositoryItem = ({ repository }) => {
             </Pressable>
           </View>
         ) : (
-          <View><Text>SOP</Text></View>
+          <View></View>
         )}
       </Pressable>
     </View>

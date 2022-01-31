@@ -7,6 +7,7 @@ export const GET_REPOSITORIES = gql`
             node {
             id,
             fullName,
+            description,
             language,
             stargazersCount,
             reviewCount,
@@ -26,12 +27,27 @@ export const GET_REPOSITORY = gql`
       id,
       fullName,
       language,
+      description,
       stargazersCount,
       reviewCount,
       forksCount,
       ratingAverage,
       ownerAvatarUrl,
-      url
+      url,
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
     }
   }
 `;
