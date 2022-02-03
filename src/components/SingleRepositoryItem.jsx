@@ -71,7 +71,11 @@ const SingleRepositoryItem = () => {
   let { id } = useParams();
   const [repository, setRepository] = useState(null);
   const result = useQuery(GET_REPOSITORY,
-    { variables: { id: id } }
+    { 
+      fetchPolicy: 'cache-and-network',
+      variables: { id: id } 
+    },
+    
   );
 
   useEffect(() => {  

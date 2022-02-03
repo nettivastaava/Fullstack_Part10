@@ -83,7 +83,7 @@ const SignIn = () => {
 
     try {
       await signIn({ username, password });
-      history.push('/')
+      history.push('/');
     } catch (e) {
       console.log('FAIL', e);
     }

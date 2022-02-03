@@ -3,6 +3,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import SignIn from './SignIn'
+import Review from './Review';
 import SingleRepositoryItem from './SingleRepositoryItem'
 import { Route, Switch, Redirect } from 'react-router-native';
 
@@ -23,6 +24,9 @@ const Main = () => {
         </Route>          
         <Route path="/signin" exact>
           <SignIn />
+        </Route>
+        <Route path="/review">
+          <Review />
         </Route>
         <Route path="/:id">
           <SingleRepositoryItem />

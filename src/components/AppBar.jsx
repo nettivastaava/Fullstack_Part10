@@ -27,7 +27,7 @@ const AppBar = () => {
   const apolloClient = useApolloClient();
 
 
-  const onPressFunction = async () => {
+  const signOutFunction = async () => {
     await authStorage.removeAccessToken();
 
     apolloClient.resetStore();
@@ -43,7 +43,15 @@ const AppBar = () => {
       </View>
       {data?.authorizedUser?.username ? (
       <View style={styles.flexItem}>
-        <Pressable onPress={onPressFunction}>
+        <Link to="/review">
+          <Text color="textTab">Review</Text>
+        </Link>
+      </View> ) : (
+      <View></View>
+      )}
+      {data?.authorizedUser?.username ? (
+      <View style={styles.flexItem}>
+        <Pressable onPress={signOutFunction}>
           <Text color="textTab">Sign out</Text>
         </Pressable>
       </View>
