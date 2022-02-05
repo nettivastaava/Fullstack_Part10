@@ -34,10 +34,10 @@ const styles = StyleSheet.create({
 const ReviewForm = ({ onSubmit }) => {
   return (
     <View>
-      <FormikTextInput style={styles.inputField} name="ownerName" placeholder="OwnerName" />      
-      <FormikTextInput style={styles.inputField} name="repositoryName" placeholder="RepositoryName" />  
-      <FormikTextInput style={styles.inputField} name="rating" placeholder="Rating" />  
-      <FormikTextInput style={styles.inputField} name="text" placeholder="Text" multiline={true} /> 
+      <FormikTextInput style={styles.inputField} name="ownerName" placeholder="Owner name" />      
+      <FormikTextInput style={styles.inputField} name="repositoryName" placeholder="Repository name" />  
+      <FormikTextInput style={styles.inputField} keyboardType="numeric" name="rating" placeholder="Rating" />  
+      <FormikTextInput style={styles.inputField} name="text" placeholder="Review" multiline={true} /> 
       <View style={styles.submit}>
         <Pressable onPress={onSubmit}>
           <Text color ="textTab" fontWeight="bold">Submit</Text>
@@ -82,7 +82,6 @@ const Review = () => {
     const text = values.text;
 
     try {
-      console.log('oi');
       await mutate({ variables: { repositoryName, ownerName, rating, text } });
     } catch (e) {
       console.log('FAIL', e);
