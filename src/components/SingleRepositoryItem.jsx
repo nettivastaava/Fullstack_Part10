@@ -64,8 +64,8 @@ const ReviewItem = ({ review }) => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const SingleRepositoryItem = () => {
   let { id } = useParams();
@@ -89,8 +89,8 @@ const SingleRepositoryItem = () => {
       <View>
         <Text>loading...</Text>
       </View>
-    )
-  };
+    );
+  }
   const reviews = result.data.repository.reviews;
 
   const reviewNodes = reviews
@@ -114,6 +114,6 @@ const SingleRepositoryItem = () => {
       </View>}
     />
   );
-}
+};
 
 export default SingleRepositoryItem;
