@@ -20,6 +20,57 @@ const styles = StyleSheet.create({
     margin: 5
   }
 });
+const RepositoryListHeader = (props) => {
+
+  return (
+    <View>
+      <TextInput 
+            style={styles.inputField} 
+            name="filter" 
+            placeholder="Search"
+            onChangeText={props.setFilter}
+          />
+          <Picker
+            selectedValue={props.pickedValue}
+            onValueChange={(itemValue, itemIndex) =>         
+              props.changeValues(itemValue)
+            }>
+            <Picker.Item label="Latest repositories" value="Latest" />
+            <Picker.Item label="Highest rated repositories" value="Highest" />
+            <Picker.Item label="Lowest rated repositories" value="Lowest" />
+          </Picker>
+    </View>
+  );
+};
+
+export class RepositoryListContainer extends React.Component {
+  renderHeader = () => {
+    const props = this.props;
+
+    return (
+      <RepositoryListHeader
+        setFilter={props.setFilter}
+        pickedValue={props.pickedValue}
+        changeValues={props.changeValues}
+      />
+    );
+  };
+
+  render() {
+    return (
+      <FlatList
+        data={this.props.repositoryNodes}
+        ItemSeparatorComponent={this.props.ItemSeparator}
+        ListHeaderComponent={this.renderHeader}
+        renderItem={({ item, index, separators }) => (
+          <View style={{ backgroundColor: 'white' }}>
+            <RepositoryItem repository={item}/>
+          </View>
+        )}
+    />
+    );
+  }
+}
 
 const RepositoryList = () => {
   const [orderBy, setOrderBy] = useState('CREATED_AT');
@@ -28,8 +79,6 @@ const RepositoryList = () => {
   const [filter, setFilter] = useState('');
   const [searchKeyword] = useDebounce(filter, 5000);
   const { repositories } = useRepositories({ orderBy, orderDirection, searchKeyword});
-
-  console.log('FILTER ', filter);
 
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
@@ -53,33 +102,12 @@ const RepositoryList = () => {
   };
 
   return (
-    <FlatList
-      data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      ListHeaderComponent={() => 
-        <View style={styles.picker}>
-          <TextInput 
-            style={styles.inputField} 
-            name="filter" 
-            placeholder="Search"
-            onChangeText={setFilter}
-          />
-          <Picker
-            selectedValue={pickedValue}
-            onValueChange={(itemValue, itemIndex) =>         
-              changeValues(itemValue)
-            }>
-            <Picker.Item label="Latest repositories" value="Latest" />
-            <Picker.Item label="Highest rated repositories" value="Highest" />
-            <Picker.Item label="Lowest rated repositories" value="Lowest" />
-          </Picker>
-        </View>
-      }
-      renderItem={({ item, index, separators }) => (
-        <View style={{ backgroundColor: 'white' }}>
-          <RepositoryItem repository={item}/>
-        </View>
-      )}
+    <RepositoryListContainer
+      repositoryNodes={repositoryNodes}
+      changeValues={changeValues}
+      pickedValue={pickedValue}
+      ItemSeparator={ItemSeparator}
+      setFilter={setFilter}
     />
   );
 };
