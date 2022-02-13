@@ -61,6 +61,7 @@ export class RepositoryListContainer extends React.Component {
       <FlatList
         data={this.props.repositoryNodes}
         ItemSeparatorComponent={this.props.ItemSeparator}
+        onEndReached={this.props.onEndReach}
         ListHeaderComponent={this.renderHeader}
         renderItem={({ item, index, separators }) => (
           <View style={{ backgroundColor: 'white' }}>
@@ -78,7 +79,11 @@ const RepositoryList = () => {
   const [pickedValue, setPickedValue] = useState('Latest');
   const [filter, setFilter] = useState('');
   const [searchKeyword] = useDebounce(filter, 5000);
-  const { repositories } = useRepositories({ orderBy, orderDirection, searchKeyword});
+  const { repositories, fetchMore } = useRepositories({ first: 8, orderBy, orderDirection, searchKeyword});
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
@@ -104,6 +109,7 @@ const RepositoryList = () => {
   return (
     <RepositoryListContainer
       repositoryNodes={repositoryNodes}
+      onEndReach={onEndReach}
       changeValues={changeValues}
       pickedValue={pickedValue}
       ItemSeparator={ItemSeparator}
