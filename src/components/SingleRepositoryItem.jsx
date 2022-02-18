@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import RepositoryItem from './RepositoryItem';
-import { GET_REPOSITORY } from '../graphql/queries';
+import useRepository from '../hooks/useRepository';
 import { useParams } from 'react-router-native';
 import { View, StyleSheet, FlatList } from 'react-native';
 import Text from './Text';
@@ -69,29 +69,21 @@ const ReviewItem = ({ review }) => {
 
 const SingleRepositoryItem = () => {
   let { id } = useParams();
-  const [repository, setRepository] = useState(null);
-  const result = useQuery(GET_REPOSITORY,
-    { 
-      fetchPolicy: 'cache-and-network',
-      variables: { id: id } 
-    },
-    
-  );
+  const { repository, fetchMore } = useRepository({ id: id, first: 8});
 
-  useEffect(() => {  
-    if (result.data) {     
-      setRepository(result.data.repository);
-    }  
-  }, [result.data]);
+  const onEndReach = () => {
+    fetchMore();
+  };
 
-  if (result.loading || repository === null) {
-    return (
+  if (!repository) {
+    return(
       <View>
         <Text>loading...</Text>
       </View>
     );
   }
-  const reviews = result.data.repository.reviews;
+
+  const reviews = repository.reviews;
 
   const reviewNodes = reviews
     ? reviews.edges.map(edge => edge.node)
@@ -108,6 +100,7 @@ const SingleRepositoryItem = () => {
       </View>}
       keyExtractor={({ id }) => id}
       ItemSeparatorComponent={ItemSeparator}
+      onEndReached={onEndReach}
       ListHeaderComponent={() => 
       <View style={{ backgroundColor: 'white' }}> 
         <RepositoryItem repository={repository} />
